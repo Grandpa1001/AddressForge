@@ -35,7 +35,7 @@ XXX is a
 
 ## Libraries
 
-- [@remixproject/plugin-webview](https://github.com/bunsenstraat/remix-plugin-docs/blob/master/docs/plugin/packages/) - A library for creating plugins for the Remix IDE, enabling webview integration for enhanced development workflows within the Ethereum ecosystem.
+- [@remixproject/plugin-webview](https://github.com/bunsenstraat/remix-plugin-docs/blob/master/docs/plugin/packages) - A library for creating plugins for the Remix IDE, enabling webview integration for enhanced development workflows within the Ethereum ecosystem.
 - [env](https://www.npmjs.com/package/dotenv) - Library for loading environment variables from a .env file.
 - [axios](https://axios-http.com/) - Promise-based HTTP client for making API requests.
 - [express](https://expressjs.com/) - Fast, unopinionated, minimalist web framework for Node.js.
