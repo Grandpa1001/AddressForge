@@ -16,17 +16,17 @@
 .label-value{
 font-weight: 100;
 font-size: small;
+color:black;
 max-width: 250px; /* Przykładowa szerokość, dostosuj ją do swoich potrzeb */
 word-wrap: break-word;
 }
 
 .App-header {
-
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  font-size: calc(10px + 1vmin);
   color: white;
 }
 
@@ -34,14 +34,54 @@ word-wrap: break-word;
   color: #61dafb;
 }
 
-.Button-container{
-  margin:30px;
-  padding:20px;
-  background-color:#e0d3f825;
+.input-group {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  padding: 5px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  border: 2px solid #000000b1;
+}
+
+.forged-input:focus {
+  outline: none;
+}
+
+.input-prefix {
+  color: black;
+  font-size: small;
+  padding: 2px;
+}
+
+.error-validate {
+  color: red;
+  font-size: 10px;
+  margin-top:-10px;
+}
+
+.forged-input {
+  flex-grow: 1; /* ensures the input takes the remaining space */
+  border: none; /* removes the border inside the input-group */
+  font-size: small;
+  margin-left: -2px; /* space between prefix and input */
+}
+
+.input-label {
+  color: black;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.App-container {
+  margin: 30px;
+  padding: 20px;
+  background-color: #E1D2F8;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start; 
   justify-content: center;
+  border-radius: 2px;
 }
 
 button {
