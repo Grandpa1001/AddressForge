@@ -31,7 +31,7 @@
 
 .label-value{
 font-weight: 100;
-font-size: small;
+font-size: 10px;
 color:black;
 max-width: 250px;
 word-wrap: break-word;
@@ -57,7 +57,16 @@ word-wrap: break-word;
   padding: 5px;
   margin-bottom: 10px;
   border-radius: 8px;
-  border: 2px solid #000000b1;
+  border: 1px solid #000000b1;
+}
+
+.value-group {
+  display: block;
+  background-color: white;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  border: 1px solid #000000b1;
 }
 
 .forged-input:focus {
@@ -77,10 +86,10 @@ word-wrap: break-word;
 }
 
 .forged-input {
-  flex-grow: 1; /* ensures the input takes the remaining space */
-  border: none; /* removes the border inside the input-group */
+  flex-grow: 1; 
+  border: none; 
   font-size: small;
-  margin-left: -2px; /* space between prefix and input */
+  margin-left: -2px;
   min-width: 170px; 
 }
 
@@ -88,6 +97,7 @@ word-wrap: break-word;
   color: black;
   margin-bottom: 5px;
   display: block;
+  text-align: left; 
 }
 
 .App-container {
@@ -108,6 +118,39 @@ button {
   margin-bottom:10px;
   border-radius: 2px;
   font-size:16px;
+}
+
+.gas-reduction {
+  display: flex;
+  align-items: center; 
+  justify-content: center;
+  margin-bottom:20px;
+}
+
+.gas-reduction-label {
+  margin-right: 10px;
+}
+
+.gas-reduction-btn {
+  border: none;
+  background-color: #5552FF;
+  color: white;
+  margin:6px;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gas-reduction-input {
+  text-align: center;
+  width: 40px;
+  height: 31px;
+  margin: 0;
+  font-size: 14px;
+  border: 1px solid #000; /* Ustawia obramowanie o grubości 1px i kolorze czarnym */
+  border-radius: 4px; 
 }
 
 @keyframes App-logo-spin {

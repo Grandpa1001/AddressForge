@@ -13,7 +13,7 @@ function App() {
   const [isValidAddress, setIsValidAddress] = useState(true);
   const [addressCreationPurpose, setAddressCreationPurpose] = useState('');
   const [editablePart, setEditablePart] = useState('');
-
+  const [gasReductionLevel, setGasReductionLevel] = useState(1);
 
   const ethereumAddressRegex = /^0x[a-fA-F0-9]+$/;
 
@@ -23,6 +23,15 @@ function App() {
     getNetwork();
     getAccount();
   };
+
+  const increment = () => {
+    setGasReductionLevel((prev) => (prev < 20 ? prev + 1 : prev));
+  };
+  
+  const decrement = () => {
+    setGasReductionLevel((prev) => (prev > 0 ? prev - 1 : prev));
+  };
+  
 
   //Inputs
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -57,7 +66,7 @@ function App() {
     try {
       const accounts = await client.udapp.getAccounts()
       console.log(accounts)
-      setAcc(accounts)
+      setAcc(accounts[0])
     } catch (error) {
       if (error instanceof Error) {
         console.error('Błąd:', error.message);
@@ -110,6 +119,7 @@ function App() {
           maxLength={20} 
         />
       </div>
+      {!isValidAddress && <div className="error-validate">Use only the appropriate characters.</div>}
 
       <div className="radio-group">
       <label htmlFor="editablePart" className="input-label">Choose the editable part of address:</label>
@@ -134,13 +144,28 @@ function App() {
         <span className="radio-value">Suffix</span>
       </label>
     </div>
+
+    <label htmlFor="gasReduction" className="input-label">Choose level of gas reduction</label>
+      <div className="gas-reduction">
+        <button className="gas-reduction-btn" onClick={decrement}>-</button>
+        <input
+          type="text"
+          value={gasReductionLevel}
+          readOnly
+          className="gas-reduction-input"
+        />
+        <button className="gas-reduction-btn" onClick={increment}>+</button>
+      </div>
+
+    <div className="value-group">
+      <label htmlFor="account" className="input-label">Deployer wallet</label>
+      <div className="label-value">{acc}</div>  
+
+    </div>
     <button onClick={getNetworkClick}>referesh</button>
-      {!isValidAddress && <div className="error-validate">Use only the appropriate characters.</div>}
         {errorMessage && <div className="error-message">{errorMessage}</div>}
         <div className="label-value"> <b>Chain id:</b></div>
         <div className="label-value">{chainId}</div>
-        <div className="label-value"><b>Account:</b></div>
-        <div className="label-value">{acc}</div>
         </div>
       </header>
     </div>
