@@ -13,6 +13,13 @@
   }
 }
 
+.label-value{
+font-weight: 100;
+font-size: small;
+max-width: 250px; /* Przykładowa szerokość, dostosuj ją do swoich potrzeb */
+word-wrap: break-word;
+}
+
 .App-header {
 
   display: flex;
@@ -28,7 +35,7 @@
 }
 
 .Button-container{
-  margin:20px;
+  margin:30px;
   padding:20px;
   background-color:#e0d3f825;
   display: flex;
@@ -41,9 +48,10 @@ button {
   color: white;
   background-color: #5552FF;
   border: 2px solid transparent;
-  padding: 8px 16px; 
-  margin: 4px;
+  padding: 4px 10px; 
+  margin: 10px;
   border-radius: 2px;
+  font-size:16px;
 }
 
 @keyframes App-logo-spin {

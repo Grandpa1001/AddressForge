@@ -3,55 +3,50 @@ import React, { useState } from 'react';
 import Header from './Header';
 
 import { createClient } from '@remixproject/plugin-webview'
-//import { PluginClient } from '@remixproject/plugin'
 
 function App() {
   // @ts-ignore
   const client = createClient();
   const [errorMessage, setErrorMessage] = useState('');
+  const [chainId, setChainId] = useState('');
+  const [acc, setAcc] = useState('');
 
   //Buttons
-  const getNameSol = async () => {
-    setErrorMessage(''); 
-    getFile();
-  };
-
   const getNetworkClick = async () => {
     setErrorMessage(''); 
     getNetwork();
+    getAccount();
   };
 
-  const gotoDapp = async () => {
-    console.log("goto dapp")
-  };
 
   //function
-  async function getFile() {
+  async function getNetwork() {
     try {
-      const fileName = await client.call('fileManager', 'getCurrentFile');
-      console.log(fileName)
+      const network = await client.call('network', 'detectNetwork');
+      setChainId(network.id);
     } catch (error) {
       if (error instanceof Error) {
         console.error('Błąd:', error.message);
-        setErrorMessage(error.message); // Set error message
+        setErrorMessage(error.message);
       } else {
         console.error('Wystąpił błąd', error);
-        setErrorMessage('Wystąpił nieoczekiwany błąd'); // Set generic error message
+        setErrorMessage('Wystąpił nieoczekiwany błąd');
       }
     }
   }
 
-  async function getNetwork() {
+  async function getAccount() {
     try {
-      const network = await client.network.detectNetwork()
-      console.log(network)
+      const accounts = await client.udapp.getAccounts()
+      console.log(accounts)
+      setAcc(accounts)
     } catch (error) {
       if (error instanceof Error) {
         console.error('Błąd:', error.message);
-        setErrorMessage(error.message); // Set error message
+        setErrorMessage(error.message);
       } else {
         console.error('Wystąpił błąd', error);
-        setErrorMessage('Wystąpił nieoczekiwany błąd'); // Set generic error message
+        setErrorMessage('Wystąpił nieoczekiwany błąd');
       }
     }
   }
@@ -63,14 +58,19 @@ function App() {
     <div className="App">
       <header className="App-header">
         <div className="Button-container">
-        <button onClick={getNameSol}>getName sol</button>
-        <button onClick={getNetworkClick}>getChain</button>
         {errorMessage && <div className="error-message">{errorMessage}</div>}
+        <div className="label-value"> <b>Chain id:</b></div>
+        <div className="label-value">{chainId}</div>
+        <div className="label-value"><b>Account:</b></div>
+        <div className="label-value">{acc}</div>
+        <button onClick={getNetworkClick}>getData</button>
         </div>
       </header>
     </div>
     </>
   );
 }
+
+
 
 export default App;
