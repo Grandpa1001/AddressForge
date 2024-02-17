@@ -1,15 +1,8 @@
-// In your App.js or a component file
 
-import React from 'react';
-import logo from './Logo.png'
-import './Header.css'; // Make sure to create a Header.css file with the styles
+import logo from './images/Logo.png'
+import './Header.css'; 
 
 function Header() {
-  const handleConnectWallet = () => {
-    // Implement wallet connection logic here
-    console.log('Wallet Connect button clicked');
-  };
-
   return (
     <header className="header">
       <img src={logo} alt="AddressForge Logo" className="logo" />

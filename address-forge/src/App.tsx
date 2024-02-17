@@ -1,6 +1,6 @@
 import './App.css';
 import React, { useState } from 'react';
-import Header from './Header';
+
 
 import { createClient } from '@remixproject/plugin-webview'
 
@@ -53,8 +53,6 @@ function App() {
 
   //RETURN
   return (
-    <>
-    <Header />
     <div className="App">
       <header className="App-header">
         <div className="Button-container">
@@ -67,7 +65,6 @@ function App() {
         </div>
       </header>
     </div>
-    </>
   );
 }
 
