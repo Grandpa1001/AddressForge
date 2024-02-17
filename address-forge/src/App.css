@@ -1,5 +1,5 @@
 .App {
-  text-align: center;
+  text-align: center;  
 }
 
 .App-logo {
@@ -14,8 +14,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -26,6 +25,25 @@
 
 .App-link {
   color: #61dafb;
+}
+
+.Button-container{
+  margin:20px;
+  padding:20px;
+  background-color:#e0d3f825;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+button {
+  color: white;
+  background-color: #5552FF;
+  border: 2px solid transparent;
+  padding: 8px 16px; 
+  margin: 4px;
+  border-radius: 2px;
 }
 
 @keyframes App-logo-spin {

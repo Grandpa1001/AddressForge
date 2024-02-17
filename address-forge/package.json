@@ -34,5 +34,11 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "remix": {
+    "name": "Address Forge Plugin",
+    "displayName": "Generate your own address",
+    "description": "description",
+    "documentation": "URL"
   }
 }
