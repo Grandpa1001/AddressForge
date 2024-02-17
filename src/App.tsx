@@ -11,6 +11,9 @@ function App() {
   const [acc, setAcc] = useState('');
   const [inputValue, setInputValue] = useState('');
   const [isValidAddress, setIsValidAddress] = useState(true);
+  const [addressCreationPurpose, setAddressCreationPurpose] = useState('');
+  const [editablePart, setEditablePart] = useState('');
+
 
   const ethereumAddressRegex = /^0x[a-fA-F0-9]+$/;
 
@@ -71,6 +74,30 @@ function App() {
     <div className="App">
       <header className="App-header">
         <div className="App-container">
+        <div className="radio-group">
+        <label htmlFor="purpose" className="input-label">Choose address creation purpose:</label>
+        <label>
+          <input
+            type="radio"
+            value="Editable address"
+            name="addressCreationPurpose"
+            checked={addressCreationPurpose === 'Editable address'}
+            onChange={(e) => setAddressCreationPurpose(e.target.value)}
+          />
+        <div className="radio-value">Editable address</div>
+        </label>
+        <label>
+          <input
+            type="radio"
+            value="Gas reduction"
+            name="addressCreationPurpose"
+            checked={addressCreationPurpose === 'Gas reduction'}
+            onChange={(e) => setAddressCreationPurpose(e.target.value)}
+          />
+          <div className="radio-value">Gas reduction</div>
+        </label>
+      </div>
+
         <label htmlFor="forgedAddress" className="input-label">Forged Address</label>
         <div className="input-group">
         <span className="input-prefix">{inputValue ? `0x` : '0x...'} </span>
@@ -83,13 +110,37 @@ function App() {
           maxLength={20} 
         />
       </div>
-      {!isValidAddress && <div className="error-validate">Please enter a valid Ethereum address.</div>}
+
+      <div className="radio-group">
+      <label htmlFor="editablePart" className="input-label">Choose the editable part of address:</label>
+      <label>
+        <input
+          type="radio"
+          value="prefix"
+          name="editablePart"
+          checked={editablePart === 'prefix'}
+          onChange={(e) => setEditablePart(e.target.value)}
+        />
+        <span className="radio-value">Prefix</span>
+      </label>
+      <label>
+        <input
+          type="radio"
+          value="suffix"
+          name="editablePart"
+          checked={editablePart === 'suffix'}
+          onChange={(e) => setEditablePart(e.target.value)}
+        />
+        <span className="radio-value">Suffix</span>
+      </label>
+    </div>
+    <button onClick={getNetworkClick}>referesh</button>
+      {!isValidAddress && <div className="error-validate">Use only the appropriate characters.</div>}
         {errorMessage && <div className="error-message">{errorMessage}</div>}
         <div className="label-value"> <b>Chain id:</b></div>
         <div className="label-value">{chainId}</div>
         <div className="label-value"><b>Account:</b></div>
         <div className="label-value">{acc}</div>
-        <button onClick={getNetworkClick}>getData</button>
         </div>
       </header>
     </div>
