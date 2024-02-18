@@ -13,6 +13,10 @@
   }
 }
 
+.error-message{
+  color:red;
+}
+
 .radio-group {
   margin-bottom:10px;
   text-align: left; 

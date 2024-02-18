@@ -15,7 +15,7 @@ function App() {
   const [addressCreationPurpose, setAddressCreationPurpose] = useState('Editable address');
   const [editablePart, setEditablePart] = useState('prefix');
   const [gasReductionLevel, setGasReductionLevel] = useState(1);
-  const [finishAddress, setFinishAddress] = useState('prefix');
+  const [finishAddress, setFinishAddress] = useState('');
 
   const [yourAddress, setYourAddress] = useState('');
   const [difficulty, setDifficulty] = useState('');
@@ -215,15 +215,15 @@ function App() {
       <div className="label-value">{difficulty}</div> 
     </div>
       <button onClick={useForgeService}> 🛠️  Forge your adress  🛠️</button>
-          {finishAddress=== '' ? <div>'1'</div> : 
+          {finishAddress=== '' ? '' : 
           <div className="value-group">
             <label htmlFor="account" className="input-label-box">Recieved salt:</label>
             <div className="label-value">{finishAddress}</div> 
           </div>
         }
+              {errorMessage && <div className="error-message">{errorMessage}</div>}
         </div>
       </header>
-      {errorMessage && <div className="error-message">{errorMessage}</div>}
     </div>
   );
 }
