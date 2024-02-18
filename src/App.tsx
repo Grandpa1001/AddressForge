@@ -34,7 +34,7 @@ function App() {
 
     let calculatedDifficulty = "0";
     let address = '0x';
-    const targetLength = 20;
+    const targetLength = 40;
 
     if (addressCreationPurpose === 'Editable address') {
       if(editablePart === 'sufix') {
