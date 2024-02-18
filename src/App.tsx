@@ -1,5 +1,5 @@
 import './styles/App.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { createClient } from '@remixproject/plugin-webview'
 
@@ -15,10 +15,26 @@ function App() {
   const [editablePart, setEditablePart] = useState('prefix');
   const [gasReductionLevel, setGasReductionLevel] = useState(1);
 
-  const [yourAddress, setYourAddres] = useState('');
-  const [estimateGas, setEstimateGas] = useState('');
+  const [yourAddress, setYourAddress] = useState('');
+  const [difficulty, setDifficulty] = useState('');
 
   const ethereumAddressRegex = /^0x[a-fA-F0-9]+$/;
+
+  useEffect(() => {
+    let calculatedDifficulty = "0";
+    if (addressCreationPurpose === 'Editable address') {
+      setYourAddress(`0x${inputValue}`);
+      const addressLength = inputValue.length;
+      calculatedDifficulty = addressLength > 0 ? Math.pow(16, addressLength).toLocaleString('fullwide', {useGrouping:false}) : "0";
+    } else if (addressCreationPurpose === 'Gas reduction') {
+      const zeros = '0'.repeat(gasReductionLevel);
+      setYourAddress(`0x${zeros}`);
+      calculatedDifficulty = Math.pow(16, gasReductionLevel).toLocaleString('fullwide', {useGrouping:false});
+    }
+  
+    setDifficulty(calculatedDifficulty);
+  }, [addressCreationPurpose, inputValue, gasReductionLevel]); // Obserwuj zmiany w tych stanach
+
 
   //Buttons
   const getNetworkClick = async () => {
@@ -33,6 +49,7 @@ function App() {
   
   const decrement = () => {
     setGasReductionLevel((prev) => (prev > 0 ? prev - 1 : prev));
+    
   };
   
 
@@ -171,8 +188,8 @@ function App() {
       <label htmlFor="addressGen" className="input-label-box">Your address:</label>
       <div className="label-value">{yourAddress}</div> 
 
-      <label htmlFor="estimateGasSum" className="input-label-box">Estimate gas:</label>
-      <div className="label-value">{estimateGas}</div> 
+      <label htmlFor="estimateGasSum" className="input-label-box">Difficulty:</label>
+      <div className="label-value">{difficulty}</div> 
 
     </div>
     <button onClick={getNetworkClick}>referesh</button>
