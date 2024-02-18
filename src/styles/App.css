@@ -75,6 +75,7 @@ text-align: left;
   padding-right: 10px;
   padding-left:10px;
   border-radius: 4px;
+  position: relative; 
   width: 100%;
   border: 1px solid #000000b1;
 }
@@ -93,6 +94,23 @@ text-align: left;
   color: red;
   font-size: 10px;
   margin-top:-10px;
+}
+
+.refresh {
+  position: absolute;
+  color:black;
+  margin-right: 8px;
+  right: 0; 
+  margin-top:4px;
+  font-size:10px;
+  border-radius:6px;
+  background-color:#e0d3f82d;
+  cursor: pointer; 
+}
+
+.tooltipInf{
+  padding-left:2px;
+  padding-right: 2px;;
 }
 
 .forged-input {
@@ -131,7 +149,7 @@ text-align: left;
   border-radius: 2px;
 }
 
-button {
+.button2 {
   color: white;
   background-color: #431A9F;
   border: 2px solid transparent;

@@ -19,7 +19,7 @@ export async function forgeAddress({
   });
 
   // Symulacja odpowiedzi z serwisu
-  const simulatedResponse = `0x1231231123123121311231`;
+  const simulatedResponse = `0x01f027543E33F67cB068458d73e42BDe3f5f01f0`;
 
   // Zwróć symulowaną odpowiedź (w przyszłości tutaj będzie wywołanie API)
   return simulatedResponse; // Dodano instrukcję return

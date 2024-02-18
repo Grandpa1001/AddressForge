@@ -1,5 +1,7 @@
 import './styles/App.css';
 import React, { useState, useEffect } from 'react';
+import Tippy from '@tippyjs/react';
+import 'tippy.js/dist/tippy.css';
 
 import { forgeAddress } from './api/forgeService';
 import { createClient } from '@remixproject/plugin-webview'
@@ -23,9 +25,32 @@ function App() {
   const ethereumAddressRegex = /^0x[a-fA-F0-9]+$/;
 
   useEffect(() => {
+
+    const generateRandomChar = () => {
+      const chars = 'abcdefABCDEF0123456789';
+      const randomIndex = Math.floor(Math.random() * chars.length);
+      return chars[randomIndex];
+    };
+
     let calculatedDifficulty = "0";
+    let address = '0x';
+    const targetLength = 20;
+
     if (addressCreationPurpose === 'Editable address') {
-      setYourAddress(`0x${inputValue}`);
+      if(editablePart === 'sufix') {
+        // Dopełnienie adresu losowymi znakami przed inputValue
+        while(address.length + inputValue.length < targetLength + 2) { // +2 dla "0x"
+          address += generateRandomChar();
+        }
+        address += inputValue;
+      } else {
+        // Dopełnienie adresu losowymi znakami po inputValue
+        address += inputValue;
+        while(address.length < targetLength + 2) { // +2 dla "0x"
+          address += generateRandomChar();
+        }
+      }
+      setYourAddress(address);
       const addressLength = inputValue.length;
       calculatedDifficulty = addressLength > 0 ? Math.pow(16, addressLength).toLocaleString('fullwide', {useGrouping:false}) : "0";
     } else if (addressCreationPurpose === 'Gas reduction') {
@@ -62,6 +87,7 @@ function App() {
   };
   
   //function
+
   async function getNetwork() {
     try {
       const network = await client.call('network', 'detectNetwork');
@@ -126,7 +152,14 @@ function App() {
       <header className="App-header">
         <div className="App-container">
         <div className="radio-group">
-        <label htmlFor="purpose" className="input-label">Choose address creation purpose:</label>
+        <div>
+          <label htmlFor="purpose" className="input-label" title="test">
+          Choose address creation purpose
+            <Tippy content="Please note that the string adress always starts with 0x. The rest of adress contains 40 characters (20 bytes). You can edit maximum 20 characters in adress. Gas reduction is the amount of the zeros in the prefix. String have to be written in hex: 0-9, A-F, a-f. Letters can be written in uppercase or lowercase. The more changes in the adress, the more computational power will be required, therefore increasing gas price.">
+              <span className="tooltipInf">(?)</span>
+            </Tippy>
+            </label>
+        </div>
         <label>
           <input
             type="radio"
@@ -206,7 +239,10 @@ function App() {
 
     <div className="value-group">
       <label htmlFor="account" className="input-label-box">Deployer wallet:</label>
-      <div className="label-value">{acc}</div> 
+      <div className="label-value">
+        {acc || <span onClick={getAccount} style={{cursor: 'pointer', color: 'black'}}>
+          click refresh ↻</span>}
+      </div> 
 
       <label htmlFor="addressGen" className="input-label-box">Your address:</label>
       <div className="label-value">{yourAddress}</div> 
@@ -214,10 +250,10 @@ function App() {
       <label htmlFor="estimateGasSum" className="input-label-box">Difficulty:</label>
       <div className="label-value">{difficulty}</div> 
     </div>
-      <button onClick={useForgeService}> 🛠️  Forge your adress  🛠️</button>
+      <button  className="button2" onClick={useForgeService}> 🛠️  Forge your adress  🛠️</button>
           {finishAddress=== '' ? '' : 
           <div className="value-group">
-            <label htmlFor="account" className="input-label-box">Recieved salt:</label>
+            <label htmlFor="account" className="input-label-box">CREATE3 recieved salt:</label>
             <div className="label-value">{finishAddress}</div> 
           </div>
         }
