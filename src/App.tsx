@@ -1,6 +1,7 @@
 import './styles/App.css';
 import React, { useState, useEffect } from 'react';
 
+import { forgeAddress } from './api/forgeService';
 import { createClient } from '@remixproject/plugin-webview'
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
   const [addressCreationPurpose, setAddressCreationPurpose] = useState('Editable address');
   const [editablePart, setEditablePart] = useState('prefix');
   const [gasReductionLevel, setGasReductionLevel] = useState(1);
+  const [finishAddress, setFinishAddress] = useState('prefix');
 
   const [yourAddress, setYourAddress] = useState('');
   const [difficulty, setDifficulty] = useState('');
@@ -37,12 +39,6 @@ function App() {
 
 
   //Buttons
-  const getNetworkClick = async () => {
-    setErrorMessage(''); 
-    getNetwork();
-    getAccount();
-  };
-
   const increment = () => {
     setGasReductionLevel((prev) => (prev < 20 ? prev + 1 : prev));
   };
@@ -84,7 +80,6 @@ function App() {
   async function getAccount() {
     try {
       const accounts = await client.udapp.getAccounts()
-      console.log(accounts)
       setAcc(accounts[0])
     } catch (error) {
       if (error instanceof Error) {
@@ -94,8 +89,36 @@ function App() {
         console.error('Wystąpił błąd', error);
         setErrorMessage('Wystąpił nieoczekiwany błąd');
       }
+    
     }
   }
+
+  async function useForgeService () {
+    getAccount();
+    console.log('deployer address ' + acc);
+    if(acc === ''){
+      setErrorMessage('Error deployer address needed');
+      return
+    }else {
+      setErrorMessage('')
+    }
+
+    getNetwork();
+    console.log('chainID '+ chainId)
+    handleForgeAddress();
+  }
+
+  const handleForgeAddress = async () => {
+    const params = {
+      addressInput: yourAddress,
+      deployerAddres: acc,
+      chainIAddres: chainId,
+    };
+    const response = await forgeAddress(params);
+    console.log(response);
+    setFinishAddress(response);
+    // Tutaj możesz zaktualizować stan komponentu odpowiedzią z funkcji
+  };
 
   //RETURN
   return (
@@ -190,16 +213,22 @@ function App() {
 
       <label htmlFor="estimateGasSum" className="input-label-box">Difficulty:</label>
       <div className="label-value">{difficulty}</div> 
-
     </div>
-    <button onClick={getNetworkClick}>referesh</button>
-        {errorMessage && <div className="error-message">{errorMessage}</div>}
-        <div className="label-value"> <b>Chain id:</b></div>
-        <div className="label-value">{chainId}</div>
+      <button onClick={useForgeService}> 🛠️  Forge your adress  🛠️</button>
+          {finishAddress=== '' ? <div>'1'</div> : 
+          <div className="value-group">
+            <label htmlFor="account" className="input-label-box">Recieved salt:</label>
+            <div className="label-value">{finishAddress}</div> 
+          </div>
+        }
         </div>
       </header>
+      {errorMessage && <div className="error-message">{errorMessage}</div>}
     </div>
   );
 }
+
+
+
 
 export default App;
