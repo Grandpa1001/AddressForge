@@ -33,8 +33,10 @@
 font-weight: 100;
 font-size: 10px;
 color:black;
-max-width: 250px;
+max-width: 252px;
+min-width: 160px;
 word-wrap: break-word;
+text-align: left;
 }
 
 .App-header {
@@ -63,8 +65,11 @@ word-wrap: break-word;
 .value-group {
   display: block;
   background-color: white;
-  padding: 15px;
-  margin-bottom: 10px;
+  padding: 4px;
+  padding-bottom: 10px;
+  margin-bottom:12px;
+  padding-right: 10px;
+  padding-left:10px;
   border-radius: 4px;
   border: 1px solid #000000b1;
 }
@@ -75,7 +80,7 @@ word-wrap: break-word;
 
 .input-prefix {
   color: black;
-  font-size: small;
+  font-size: 12px;
   padding: 2px;
 }
 
@@ -88,7 +93,7 @@ word-wrap: break-word;
 .forged-input {
   flex-grow: 1; 
   border: none; 
-  font-size: small;
+  font-size: 12px;
   margin-left: -2px;
   min-width: 170px; 
 }
@@ -96,8 +101,18 @@ word-wrap: break-word;
 .input-label {
   color: black;
   margin-bottom: 5px;
+  margin-top:10px;
   display: block;
   text-align: left; 
+}
+
+.input-label-box {
+  color: black;
+  margin-bottom: 5px;
+  margin-top:10px;
+  display: block;
+  text-align: left; 
+  text-decoration: underline;
 }
 
 .App-container {

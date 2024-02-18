@@ -11,8 +11,8 @@ function App() {
   const [acc, setAcc] = useState('');
   const [inputValue, setInputValue] = useState('');
   const [isValidAddress, setIsValidAddress] = useState(true);
-  const [addressCreationPurpose, setAddressCreationPurpose] = useState('');
-  const [editablePart, setEditablePart] = useState('');
+  const [addressCreationPurpose, setAddressCreationPurpose] = useState('Editable address');
+  const [editablePart, setEditablePart] = useState('prefix');
   const [gasReductionLevel, setGasReductionLevel] = useState(1);
 
   const ethereumAddressRegex = /^0x[a-fA-F0-9]+$/;
@@ -92,6 +92,7 @@ function App() {
             name="addressCreationPurpose"
             checked={addressCreationPurpose === 'Editable address'}
             onChange={(e) => setAddressCreationPurpose(e.target.value)}
+
           />
         <div className="radio-value">Editable address</div>
         </label>
@@ -106,7 +107,7 @@ function App() {
           <div className="radio-value">Gas reduction</div>
         </label>
       </div>
-
+        {addressCreationPurpose === 'Editable address' ? <>
         <label htmlFor="forgedAddress" className="input-label">Forged Address</label>
         <div className="input-group">
         <span className="input-prefix">{inputValue ? `0x` : '0x...'} </span>
@@ -120,7 +121,7 @@ function App() {
         />
       </div>
       {!isValidAddress && <div className="error-validate">Use only the appropriate characters.</div>}
-
+      
       <div className="radio-group">
       <label htmlFor="editablePart" className="input-label">Choose the editable part of address:</label>
       <label>
@@ -144,8 +145,10 @@ function App() {
         <span className="radio-value">Suffix</span>
       </label>
     </div>
-
-    <label htmlFor="gasReduction" className="input-label">Choose level of gas reduction</label>
+      </> 
+      :
+      <>
+      <label htmlFor="gasReduction" className="input-label">Choose level of gas reduction</label>
       <div className="gas-reduction">
         <button className="gas-reduction-btn" onClick={decrement}>-</button>
         <input
@@ -156,10 +159,18 @@ function App() {
         />
         <button className="gas-reduction-btn" onClick={increment}>+</button>
       </div>
+      </>
+      }
 
     <div className="value-group">
-      <label htmlFor="account" className="input-label">Deployer wallet</label>
-      <div className="label-value">{acc}</div>  
+      <label htmlFor="account" className="input-label-box">Deployer wallet:</label>
+      <div className="label-value">{acc}</div> 
+
+      <label htmlFor="addressGen" className="input-label-box">Your address:</label>
+      <div className="label-value">0x2dasdqw</div> 
+
+      <label htmlFor="estimateGasSum" className="input-label-box">Estimate sum:</label>
+      <div className="label-value">12312312</div> 
 
     </div>
     <button onClick={getNetworkClick}>referesh</button>
