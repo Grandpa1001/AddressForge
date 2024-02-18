@@ -15,6 +15,9 @@ function App() {
   const [editablePart, setEditablePart] = useState('prefix');
   const [gasReductionLevel, setGasReductionLevel] = useState(1);
 
+  const [yourAddress, setYourAddres] = useState('');
+  const [estimateGas, setEstimateGas] = useState('');
+
   const ethereumAddressRegex = /^0x[a-fA-F0-9]+$/;
 
   //Buttons
@@ -36,7 +39,6 @@ function App() {
   //Inputs
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
-    // Assuming your prefix "0x" is already included and the user types the remaining part
     const fullAddress = `0x${value}`;
     const isValid = ethereumAddressRegex.test(fullAddress);
     setIsValidAddress(isValid);
@@ -92,7 +94,6 @@ function App() {
             name="addressCreationPurpose"
             checked={addressCreationPurpose === 'Editable address'}
             onChange={(e) => setAddressCreationPurpose(e.target.value)}
-
           />
         <div className="radio-value">Editable address</div>
         </label>
@@ -110,7 +111,7 @@ function App() {
         {addressCreationPurpose === 'Editable address' ? <>
         <label htmlFor="forgedAddress" className="input-label">Forged Address</label>
         <div className="input-group">
-        <span className="input-prefix">{inputValue ? `0x` : '0x...'} </span>
+        <span className="input-prefix">{editablePart === 'prefix' ? `0x` : '0x...'} </span>
         <input 
           type="text"
           placeholder="Enter your desired address"
@@ -119,6 +120,7 @@ function App() {
           className="forged-input"
           maxLength={20} 
         />
+        <span className="input-prefix">{editablePart === 'prefix' ? '...' : ''} </span>
       </div>
       {!isValidAddress && <div className="error-validate">Use only the appropriate characters.</div>}
       
@@ -167,10 +169,10 @@ function App() {
       <div className="label-value">{acc}</div> 
 
       <label htmlFor="addressGen" className="input-label-box">Your address:</label>
-      <div className="label-value">0x2dasdqw</div> 
+      <div className="label-value">{yourAddress}</div> 
 
-      <label htmlFor="estimateGasSum" className="input-label-box">Estimate sum:</label>
-      <div className="label-value">12312312</div> 
+      <label htmlFor="estimateGasSum" className="input-label-box">Estimate gas:</label>
+      <div className="label-value">{estimateGas}</div> 
 
     </div>
     <button onClick={getNetworkClick}>referesh</button>
