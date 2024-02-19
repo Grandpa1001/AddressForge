@@ -143,7 +143,7 @@ function App() {
     const response = await forgeAddress(params);
     console.log(response);
     setFinishAddress(response);
-    // Tutaj możesz zaktualizować stan komponentu odpowiedzią z funkcji
+    
   };
 
   //RETURN

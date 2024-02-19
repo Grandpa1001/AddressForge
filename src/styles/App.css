@@ -190,7 +190,7 @@ text-align: left;
   height: 31px;
   margin: 0;
   font-size: 14px;
-  border: 1px solid #000; /* Ustawia obramowanie o grubości 1px i kolorze czarnym */
+  border: 1px solid #000; 
   border-radius: 4px; 
 }
 
