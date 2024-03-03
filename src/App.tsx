@@ -4,7 +4,7 @@ import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 
 import { forgeAddress } from './api/forgeService';
-import { createClient } from '@remixproject/plugin-webview' //change webview --->iframe
+import { createClient } from '@remixproject/plugin-webview' 
 
 function App() {
   // @ts-ignore
